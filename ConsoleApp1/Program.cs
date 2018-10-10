@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace ConsoleApp1
 {
     class Trapeciya
@@ -42,59 +41,64 @@ namespace ConsoleApp1
         public double seredina()
         {
             return ((to4ka_1 + to4ka_4) / 2);
-        }
-            
+        }    
     }
-
-
     class Program
     {
         static void Main(string[] args)
         {
             Dictionary<string, Dictionary<string, Trapeciya>> vvod = new Dictionary<string, Dictionary<string, Trapeciya>>()
             {
-                {"Температура", new Dictionary<string, Trapeciya>() {
-                    {"Холодно",new Trapeciya(10,15,17.5,22.5) },
-                    {"Тепло", new Trapeciya(17.5,25,25,32.5)},
-                    {"Жарко", new Trapeciya(27.5,32.5,35,40)} } },
-                {"Скорость", new Dictionary<string, Trapeciya>(){
-                        {"Падает", new Trapeciya(-6,-6,-3.5,-1)},
-                    {"Не меняется", new Trapeciya(-3,0.0,0.0,3) },
-                    {"Растет", new Trapeciya(1,3.5,6,6) }
+                {"Скорость авто", new Dictionary<string, Trapeciya>() {
+                    {"Медленно",new Trapeciya(10,20,40,50) },
+                    {"Нормально", new Trapeciya(45,60,80,90)},
+                    {"Быстро", new Trapeciya(80,95,110,120)} } },
+                {"Вероятность камеры на дороге", new Dictionary<string, Trapeciya>(){
+                        {"Низкая", new Trapeciya(5,10,25,30)},
+                    {"Средняя", new Trapeciya(25,35,50,60) },
+                    {"Высокая", new Trapeciya(50,65,95,100) }
                         } }
                 };
             Dictionary<string, Dictionary<string, Trapeciya>> vivod = new Dictionary<string, Dictionary<string, Trapeciya>>()
             {
-                {"Поворот", new Dictionary<string, Trapeciya>() {
-                    {"Против часовой",new Trapeciya(5,20,30,30) },
-                    {"Не менять", new Trapeciya(-15,-5,5,15)},
-                    {"По часовой", new Trapeciya(-30,-30,-20,-5)} }
+                {"Вероятность прихода штрафа", new Dictionary<string, Trapeciya>() {
+                    {"Не придёт",new Trapeciya(5,10,30,40) },
+                    {"Возможно придёт", new Trapeciya(30,50,50,70)},
+                    {"Точно придёт", new Trapeciya(50,70,95,100)} }
                 },
                 };
             double a , b ;
-            Console.WriteLine("Введите температуру в комнате");
+            Console.Write("Введите вашу скорость:");
             a = Convert.ToDouble(Console.ReadLine());
-            Console.WriteLine("Введите скорость изменения");
+            Console.Write("Введите вероятность камеры на дороге:");
             b = Convert.ToDouble(Console.ReadLine());
-            object[,] Mas = new object[9,2];
-            Mas[0, 0] = vivod["Поворот"]["Против часовой"];
-            Mas[0, 1] = Math.Min(vvod["Температура"]["Холодно"].znacheniya(a),vvod["Скорость"]["Падает"].znacheniya(b));
-            Mas[1, 0] = vivod["Поворот"]["Против часовой"];
-            Mas[1, 1] = Math.Min(vvod["Температура"]["Холодно"].znacheniya(a), vvod["Скорость"]["Не меняется"].znacheniya(b));
-            Mas[2, 0] = vivod["Поворот"]["Против часовой"];
-            Mas[2, 1] = Math.Min(vvod["Температура"]["Холодно"].znacheniya(a), vvod["Скорость"]["Растет"].znacheniya(b));
-            Mas[3, 0] = vivod["Поворот"]["Не менять"];
-            Mas[3, 1] = Math.Min(vvod["Температура"]["Тепло"].znacheniya(a), vvod["Скорость"]["Падает"].znacheniya(b));
-            Mas[4, 0] = vivod["Поворот"]["Не менять"];
-            Mas[4, 1] = Math.Min(vvod["Температура"]["Тепло"].znacheniya(a), vvod["Скорость"]["Не меняется"].znacheniya(b));
-            Mas[5, 0] = vivod["Поворот"]["Не менять"];
-            Mas[5, 1] = Math.Min(vvod["Температура"]["Тепло"].znacheniya(a), vvod["Скорость"]["Растет"].znacheniya(b));
-            Mas[6, 0] = vivod["Поворот"]["По часовой"];
-            Mas[6, 1] = Math.Min(vvod["Температура"]["Жарко"].znacheniya(a), vvod["Скорость"]["Падает"].znacheniya(b));
-            Mas[7, 0] = vivod["Поворот"]["По часовой"];
-            Mas[7, 1] = Math.Min(vvod["Температура"]["Жарко"].znacheniya(a), vvod["Скорость"]["Не меняется"].znacheniya(b));
-            Mas[8, 0] = vivod["Поворот"]["По часовой"];
-            Mas[8, 1] = Math.Min(vvod["Температура"]["Жарко"].znacheniya(a), vvod["Скорость"]["Растет"].znacheniya(b));
+            dynamic[,] Mas = new dynamic[9,2];
+            Mas[0, 0] = vivod["Вероятность прихода штрафа"]["Не придёт"];
+            Mas[0, 1] = Math.Min(vvod["Скорость авто"]["Медленно"].znacheniya(a),vvod["Вероятность камеры на дороге"]["Низкая"].znacheniya(b));
+            Mas[1, 0] = vivod["Вероятность прихода штрафа"]["Не придёт"];
+            Mas[1, 1] = Math.Min(vvod["Скорость авто"]["Медленно"].znacheniya(a), vvod["Вероятность камеры на дороге"]["Средняя"].znacheniya(b));
+            Mas[2, 0] = vivod["Вероятность прихода штрафа"]["Не придёт"];
+            Mas[2, 1] = Math.Min(vvod["Скорость авто"]["Медленно"].znacheniya(a), vvod["Вероятность камеры на дороге"]["Высокая"].znacheniya(b));
+            Mas[3, 0] = vivod["Вероятность прихода штрафа"]["Возможно придёт"];
+            Mas[3, 1] = Math.Min(vvod["Скорость авто"]["Нормально"].znacheniya(a), vvod["Вероятность камеры на дороге"]["Низкая"].znacheniya(b));
+            Mas[4, 0] = vivod["Вероятность прихода штрафа"]["Возможно придёт"];
+            Mas[4, 1] = Math.Min(vvod["Скорость авто"]["Нормально"].znacheniya(a), vvod["Вероятность камеры на дороге"]["Средняя"].znacheniya(b));
+            Mas[5, 0] = vivod["Вероятность прихода штрафа"]["Возможно придёт"];
+            Mas[5, 1] = Math.Min(vvod["Скорость авто"]["Нормально"].znacheniya(a), vvod["Вероятность камеры на дороге"]["Высокая"].znacheniya(b));
+            Mas[6, 0] = vivod["Вероятность прихода штрафа"]["Точно придёт"];
+            Mas[6, 1] = Math.Min(vvod["Скорость авто"]["Быстро"].znacheniya(a), vvod["Вероятность камеры на дороге"]["Низкая"].znacheniya(b));
+            Mas[7, 0] = vivod["Вероятность прихода штрафа"]["Точно придёт"];
+            Mas[7, 1] = Math.Min(vvod["Скорость авто"]["Быстро"].znacheniya(a), vvod["Вероятность камеры на дороге"]["Средняя"].znacheniya(b));
+            Mas[8, 0] = vivod["Вероятность прихода штрафа"]["Точно придёт"];
+            Mas[8, 1] = Math.Min(vvod["Скорость авто"]["Быстро"].znacheniya(a), vvod["Вероятность камеры на дороге"]["Высокая"].znacheniya(b));
+            double chisl = 0, znam = 0;
+            for (int i=0;i<Mas.GetLength(0);i++)
+            {
+                chisl += Mas[i,0].seredina()*Mas[i,1];
+                znam += Mas[i, 1];
+            }
+            double result = chisl / znam;
+            Console.Write($"Вероятность прихода штрафа = {znam}");
             Console.ReadKey();
         }
     }
